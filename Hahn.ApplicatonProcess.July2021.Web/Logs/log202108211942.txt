@@ -1,0 +1,10 @@
+2021-08-21 19:42:33.080 +04:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/User - -
+2021-08-21 19:42:33.137 +04:30 [INF] Executing endpoint 'Hahn.ApplicatonProcess.July2021.Web.Controllers.UserController.Get (Hahn.ApplicatonProcess.July2021.Web)'
+2021-08-21 19:42:33.145 +04:30 [INF] Route matched with {action = "Get", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Hahn.ApplicatonProcess.July2021.Domain.Entities.User]]] Get() on controller Hahn.ApplicatonProcess.July2021.Web.Controllers.UserController (Hahn.ApplicatonProcess.July2021.Web).
+2021-08-21 19:42:33.211 +04:30 [INF] Executing action method Hahn.ApplicatonProcess.July2021.Web.Controllers.UserController.Get (Hahn.ApplicatonProcess.July2021.Web) - Validation state: "Valid"
+2021-08-21 19:42:33.244 +04:30 [INF] Entity Framework Core 5.0.9 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=HahnDb 
+2021-08-21 19:42:33.253 +04:30 [INF] Executed action method Hahn.ApplicatonProcess.July2021.Web.Controllers.UserController.Get (Hahn.ApplicatonProcess.July2021.Web), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 36.8251ms.
+2021-08-21 19:42:33.258 +04:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Hahn.ApplicatonProcess.July2021.Domain.Entities.User, Hahn.ApplicatonProcess.July2021.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-08-21 19:42:33.263 +04:30 [INF] Executed action Hahn.ApplicatonProcess.July2021.Web.Controllers.UserController.Get (Hahn.ApplicatonProcess.July2021.Web) in 109.8919ms
+2021-08-21 19:42:33.269 +04:30 [INF] Executed endpoint 'Hahn.ApplicatonProcess.July2021.Web.Controllers.UserController.Get (Hahn.ApplicatonProcess.July2021.Web)'
+2021-08-21 19:42:33.276 +04:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/User - - - 200 - application/json;+charset=utf-8 196.1639ms
