@@ -6,6 +6,7 @@ using Hahn.ApplicatonProcess.July2021.Web.Logging;
 using Hahn.ApplicatonProcess.July2021.Web.SwaggerExamples;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+//using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,7 +15,6 @@ using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Net;
 using System.Net.Http;
-using System.Reflection;
 
 namespace Hahn.ApplicatonProcess.July2021.Web
 {
@@ -51,7 +51,7 @@ namespace Hahn.ApplicatonProcess.July2021.Web
                 return handler;
             });
 
-            services.AddControllers();
+            services.AddMvc(c => c.EnableEndpointRouting = false);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hahn.ApplicatonProcess.July2021.Web", Version = "v1" });
@@ -63,20 +63,34 @@ namespace Hahn.ApplicatonProcess.July2021.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hahn.ApplicatonProcess.July2021.Web v1"));
+                //app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                //{
+                //    HotModuleReplacement = true
+                //});
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseStaticFiles();
 
-            app.UseEndpoints(endpoints =>
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllers();
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Home", action = "Index" });
             });
         }
     }

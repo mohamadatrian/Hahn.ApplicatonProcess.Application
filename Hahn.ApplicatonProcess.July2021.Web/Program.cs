@@ -1,3 +1,4 @@
+using Hahn.ApplicatonProcess.July2021.Web.Extentions;
 using Hahn.ApplicatonProcess.July2021.Web.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -12,7 +13,7 @@ namespace Hahn.ApplicatonProcess.July2021.Web
         {
             CreateHostBuilder(args)
                 .Build()
-                //.SeedData()
+                .SeedData()
                 .Run();
         }
 
@@ -25,8 +26,8 @@ namespace Hahn.ApplicatonProcess.July2021.Web
              })
             .UseSerilog(SeriLogger.Configure)
             .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+            {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }
