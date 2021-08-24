@@ -3,7 +3,7 @@ import { inject } from 'aurelia-framework';
 
 @inject(HttpClient)
 export class Details {
-    public user: User;
+    public user: User | undefined;
     http: HttpClient;
     constructor(http: HttpClient) {
         this.http = http;

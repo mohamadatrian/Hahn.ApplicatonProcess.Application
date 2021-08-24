@@ -72,7 +72,7 @@
                        disabled.bind="errors.length"
                        class="btn btn-primary" value="save" />
 
-                <input type="reset" class="btn btn-danger"/>
+                <input value="reset" click.delegate="reset()" disabled.bind="!canReset" class="btn btn-danger"/>
             </form>
         </div>
     </div>

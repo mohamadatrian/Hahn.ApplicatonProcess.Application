@@ -34,7 +34,6 @@ export class App {
             title: 'user edit'
         }]);
 
-
         this.router = router;
     }
 }

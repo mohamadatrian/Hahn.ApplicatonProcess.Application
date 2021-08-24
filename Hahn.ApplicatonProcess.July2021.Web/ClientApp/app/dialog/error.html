@@ -1,0 +1,14 @@
+﻿<template>
+    <ux-dialog>
+        <ux-dialog-header>
+            <h1>${response.statusText}</h1>
+        </ux-dialog-header>
+        <ux-dialog-body>
+            <h2>${response.body}</h2>
+        </ux-dialog-body>
+
+        <ux-dialog-footer>
+            <button click.trigger="controller.ok(response)">Ok</button>
+        </ux-dialog-footer>
+    </ux-dialog>
+</template>

@@ -4,11 +4,11 @@ import { Router } from "aurelia-router";
 import { ValidationRules, ValidationController, ValidationControllerFactory } from "aurelia-validation";
 import { DialogService } from 'aurelia-dialog';
 import { BootstrapFormRenderer } from '../app/BootstrapFormRenderer';
-import { Prompt } from '../util/Prompt';
+import { Prompt } from '../../dialog/Prompt';
 
 @inject(Router, HttpClient, ValidationControllerFactory, DialogService)
 export class Edit {
-    @observable user: User;
+    @observable user: User | undefined;
     http: HttpClient;
     router: Router;
     dialogService: DialogService;
@@ -34,15 +34,15 @@ export class Edit {
             });
     }
 
-    get canSave() {
-        return this.user &&
-            this.user.firstName &&
-            this.user.lastName &&
-            this.user.age &&
-            this.user.email &&
-            this.user.address.houseNo &&
-            this.user.address.postalCode &&
-            this.user.address.street;
+    get canReset() {
+        return this.user && (
+            this.user.firstName ||
+            this.user.lastName ||
+            this.user.email ||
+            this.user.age > 0 ||
+            this.user.address.houseNo ||
+            this.user.address.postalCode ||
+            this.user.address.street);
     }
 
     userChanged() {
@@ -61,6 +61,22 @@ export class Edit {
         }
     }
 
+    reset() {
+        if (this.canReset) {
+            this.dialogService.open({ viewModel: Prompt, model: 'Do you want to reset form?', lock: false }).whenClosed(response => {
+                if (!response.wasCancelled && this.user) {
+                    this.user.firstName = '';
+                    this.user.lastName = '';
+                    this.user.email = '';
+                    this.user.age = 0;
+                    this.user.address.houseNo = '';
+                    this.user.address.postalCode = '';
+                    this.user.address.street = '';
+                }
+            });
+        }
+    }
+
     save() {
         this.controller.validate()
             .then(v => {
@@ -73,14 +89,13 @@ export class Edit {
                                     'Content-Type': 'application/json',
                                 },
                                 body: JSON.stringify(this.user)
-                            }).then(result => {
-                                let url = this.router.generate("userlist");
-                                this.router.navigate(url)
+                            }).then(response => {
+                                if (response.ok) {
+                                    let url = this.router.generate("userlist");
+                                    this.router.navigate(url)
+                                }
                             });
-                        } else {
-                            console.log('bad');
                         }
-                        console.log(response.output);
                     });
                 }
             });

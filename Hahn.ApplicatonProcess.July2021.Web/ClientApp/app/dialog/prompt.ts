@@ -10,7 +10,7 @@ export class Prompt {
     constructor(controller: DialogController) {
         this.controller = controller;
         this.answer = null;
-
+        this.message = '';
         controller.settings.centerHorizontalOnly = true;
     }
     activate(message: string) {

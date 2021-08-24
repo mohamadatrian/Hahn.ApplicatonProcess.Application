@@ -9,6 +9,7 @@ export class List {
         this.http = http;
         this.http.baseUrl = 'api/user/';
         this.getAll();
+        this.users = [];
     }
     getAll() {
         this.http.fetch('')

@@ -10,7 +10,9 @@
   <ItemGroup>
     <None Remove="ClientApp\app\components\app\BootstrapFormRenderer.ts" />
     <None Remove="ClientApp\app\components\asset\asset.ts" />
-    <None Remove="ClientApp\app\components\util\Prompt.ts" />
+    <None Remove="ClientApp\app\dialog\error.ts" />
+    <None Remove="ClientApp\app\dialog\Prompt.ts" />
+    <None Remove="ClientApp\app\util\FetchClientInterceptor.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +32,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\app\BootstrapFormRenderer.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\asset\asset.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\util\prompt.ts" />
+    <TypeScriptCompile Include="ClientApp\app\dialog\error.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\dialog\prompt.ts" />
+    <TypeScriptCompile Include="ClientApp\app\util\FetchClientInterceptor.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Compile">
