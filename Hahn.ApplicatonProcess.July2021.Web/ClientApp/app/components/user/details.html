@@ -1,0 +1,83 @@
+<template>
+    <div>
+        <h4>user details</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                first name
+            </dt>
+
+            <dd>
+                ${user.firstName}
+            </dd>
+
+            <dt>
+                last name
+            </dt>
+
+            <dd>
+                ${user.lastName}
+            </dd>
+
+            <dt>
+                age
+            </dt>
+
+            <dd>
+                ${user.age}
+            </dd>
+
+            <dt>
+                email
+            </dt>
+
+            <dd>
+                ${user.email}
+            </dd>
+
+            <dt>
+                address
+            </dt>
+
+            <dd>
+                ${user.address.street} ${user.address.houseNo} ${user.address.postalCode}
+            </dd>
+
+        </dl>
+        <h2>assets</h2>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Rank</th>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Supply</th>
+                <th>MaxSupply</th>
+                <th>MarketCapUsd</th>
+                <th>VolumeUsd24Hr</th>
+                <th>PriceUsd</th>
+                <th>ChangePercent24Hr</th>
+                <th>Vwap24Hr</th>
+                <th></th>>
+            </tr>
+            <tr repeat.for="asset of user.assets">
+                <td>${asset.Id}</td>
+                <td>${asset.Rank}</td>
+                <td>${asset.Symbol}</td>
+                <td>${asset.Name}</td>
+                <td>${asset.Supply}</td>
+                <td>${asset.MaxSupply}</td>
+                <td>${asset.MarketCapUsd}</td>
+                <td>${asset.VolumeUsd24Hr}</td>
+                <td>${asset.PriceUsd}</td>
+                <td>${asset.ChangePercent24Hr}</td>
+                <td>${asset.Vwap24Hr}</td>
+            </tr>
+        </table>
+
+        <a route-href="route:userlist"
+           class="btn btn-default">
+            Back to list
+        </a>
+    </div>
+</template>

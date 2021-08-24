@@ -1,0 +1,79 @@
+<template>
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <div class="panel-title">
+                <h3>Editing ${user.firstName} ${user.lastName}</h3>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <form class="form-horizontal"
+                  validation-errors.bind="errors"
+                  submit.delegate="save()">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">First Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" placeholder="First Name" class="form-control"
+                               value.bind="user.firstName & validate" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Last Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" placeholder="Last Name"
+                               value.bind="user.lastName & validate" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Age</label>
+                    <div class="col-sm-4">
+                        <input type="number" placeholder="Age"
+                               value.bind="user.age & validate" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-4">
+                        <input type="email" placeholder="Email"
+                               value.bind="user.email & validate" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Street</label>
+                    <div class="col-sm-4">
+                        <input type="text" placeholder="Street"
+                               value.bind="user.address.street & validate" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">House Number</label>
+                    <div class="col-sm-8">
+                        <input type="text" placeholder="House Number"
+                               value.bind="user.address.houseNo & validate" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Postal Code</label>
+                    <div class="col-sm-8">
+                        <input type="text" placeholder="Postal Code"
+                               value.bind="user.address.postalCode & validate" class="form-control" />
+                    </div>
+                </div>
+
+                <input type="submit"
+                       disabled.bind="errors.length"
+                       class="btn btn-primary" value="save" />
+
+                <input type="reset" class="btn btn-danger"/>
+            </form>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,38 @@
+<template>
+    <h1>users</h1>
+
+    <p>This component demonstrates fetching data from the server.</p>
+
+    <p if.bind="!users"><em>Loading...</em></p>
+
+    <table if.bind="users" class="table">
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th></th>>
+        </tr>
+        <tr repeat.for="user of users">
+            <td>${user.firstName}</td>
+            <td>${user.lastName}</td>
+            <td>${user.age}</td>
+            <td>${user.email}</td>
+            <td>${user.address.street} ${user.address.houseNo} ${user.address.postalCode}</td>
+            <td>
+                <a route-href="route:userdetails; params.bind:{id:user.id}"
+                   class="btn btn-default">
+                    Details
+                </a>
+                <a route-href="route:useredit; params.bind:{id:user.id}"
+                   class="btn btn-default">
+                    Edit
+                </a>
+                <button click.trigger="delete(user.id)" class="btn btn-default">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    </table>
+</template>

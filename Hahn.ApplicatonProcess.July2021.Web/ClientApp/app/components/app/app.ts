@@ -7,27 +7,33 @@ export class App {
     configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Hahn.ApplicatonProcess.July2021.Web';
         config.map([{
-            route: [ '', 'home' ],
+            route: ['', 'home'],
             name: 'home',
             settings: { icon: 'home' },
             moduleId: PLATFORM.moduleName('../home/home'),
             nav: true,
             title: 'Home'
         }, {
-            route: 'counter',
-            name: 'counter',
-            settings: { icon: 'education' },
-            moduleId: PLATFORM.moduleName('../counter/counter'),
-            nav: true,
-            title: 'Counter'
-        }, {
-            route: 'fetch-data',
-            name: 'fetchdata',
+            route: 'user/list',
+            name: 'userlist',
             settings: { icon: 'th-list' },
-            moduleId: PLATFORM.moduleName('../fetchdata/fetchdata'),
+            moduleId: PLATFORM.moduleName('../user/list'),
             nav: true,
-            title: 'Fetch data'
+            title: 'user list'
+        }, {
+            route: 'user/details/:id',
+            name: 'userdetails',
+            moduleId: PLATFORM.moduleName('../user/details'),
+            nav: false,
+            title: 'user details'
+        }, {
+            route: 'user/edit/:id',
+            name: 'useredit',
+            moduleId: PLATFORM.moduleName('../user/edit'),
+            nav: false,
+            title: 'user edit'
         }]);
+
 
         this.router = router;
     }

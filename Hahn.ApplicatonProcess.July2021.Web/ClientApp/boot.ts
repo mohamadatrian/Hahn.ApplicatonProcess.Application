@@ -3,10 +3,14 @@ import { Aurelia, PLATFORM } from 'aurelia-framework';
 import { HttpClient } from 'aurelia-fetch-client';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
+
+
 declare const IS_DEV_BUILD: boolean; // The value is supplied by Webpack during the build
 
 export function configure(aurelia: Aurelia) {
-    aurelia.use.standardConfiguration();
+    aurelia.use.standardConfiguration()
+        .plugin(PLATFORM.moduleName('aurelia-validation'))
+        .plugin(PLATFORM.moduleName('aurelia-dialog'));
 
     if (IS_DEV_BUILD) {
         aurelia.use.developmentLogging();
