@@ -2,18 +2,19 @@ import { HttpClient } from 'aurelia-fetch-client';
 import { inject } from 'aurelia-framework';
 
 @inject(HttpClient)
-export class Details {
-    public user: User | undefined;
+export class List {
+    assets: Asset[];
     http: HttpClient;
     constructor(http: HttpClient) {
         this.http = http;
+        this.getAll();
+        this.assets = [];
     }
-
-    activate(params:any) {
-        return this.http.fetch(`user/${params.id}`)
-            .then(result => result.json() as Promise<User>)
+    getAll() {
+        this.http.fetch('asset/')
+            .then(result => result.json() as Promise<Asset[]>)
             .then(data => {
-                this.user = data;
+                this.assets = data;
             });
     }
 }

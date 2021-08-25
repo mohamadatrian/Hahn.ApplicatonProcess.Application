@@ -1,0 +1,47 @@
+<template>
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <div class="panel-title">
+                <h3>Add Asset</h3>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <form class="form-horizontal"
+                  validation-errors.bind="errors"
+                  submit.delegate="save()">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Id</label>
+                    <div class="col-sm-4">
+                        <input type="text" placeholder="Id" class="form-control"
+                               value.bind="asset.id & validate" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Symbol</label>
+                    <div class="col-sm-4">
+                        <input type="text" placeholder="Symbol"
+                               value.bind="asset.symbol & validate" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" placeholder="Name"
+                               value.bind="asset.name & validate" class="form-control" />
+                    </div>
+                </div>
+
+                <input type="submit"
+                       disabled.bind="errors.length"
+                       class="btn btn-primary" value="save" />
+
+                <input value="reset" click.delegate="reset()" disabled.bind="!canReset" class="btn btn-danger"/>
+            </form>
+        </div>
+    </div>
+</template>

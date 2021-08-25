@@ -10,7 +10,7 @@ export class Details {
     }
 
     activate(params:any) {
-        return this.http.fetch(`user/${params.id}`)
+        return this.http.fetch(`'asset/'${params.id}`)
             .then(result => result.json() as Promise<User>)
             .then(data => {
                 this.user = data;

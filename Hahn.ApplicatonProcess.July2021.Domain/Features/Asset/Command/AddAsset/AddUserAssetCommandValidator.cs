@@ -7,9 +7,9 @@ namespace Hahn.ApplicatonProcess.July2021.Domain.Features.Asset.Command.AddAsset
         public AddUserAssetCommandValidator()
         {
             RuleFor(p => p.UserId).NotEmpty();
-            RuleFor(p => p.AssetId).NotEmpty().NotNull();
-            RuleFor(p => p.AssetName).NotEmpty().NotNull();
-            RuleFor(p => p.AssetSymbol).NotEmpty().NotNull();
+            RuleFor(p => p.Id).NotEmpty().NotNull();
+            RuleFor(p => p.Name).NotEmpty().NotNull();
+            RuleFor(p => p.Symbol).NotEmpty().NotNull();
         }
     }
 }

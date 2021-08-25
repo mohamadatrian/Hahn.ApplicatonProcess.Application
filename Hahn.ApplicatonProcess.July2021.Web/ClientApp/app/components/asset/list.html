@@ -1,0 +1,23 @@
+<template>
+    <h1>assets</h1>
+
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th></th>>
+        </tr>
+        <tr repeat.for="asset of assets">
+            <td>${asset.Id}</td>
+            <td>${asset.Symbol}</td>
+            <td>${asset.Name}</td>
+            <td>
+                <a route-href="route:assetdetails; params.bind:{id:asset.id}"
+                   class="btn btn-default">
+                    Details
+                </a>
+            </td>
+        </tr>
+    </table>
+</template>

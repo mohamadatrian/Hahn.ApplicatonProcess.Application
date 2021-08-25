@@ -7,12 +7,11 @@ export class List {
     http: HttpClient;
     constructor(http: HttpClient) {
         this.http = http;
-        this.http.baseUrl = 'api/user/';
         this.getAll();
         this.users = [];
     }
     getAll() {
-        this.http.fetch('')
+        this.http.fetch('user/')
             .then(result => result.json() as Promise<User[]>)
             .then(data => {
                 this.users = data;
@@ -20,7 +19,7 @@ export class List {
     }
 
     delete(id: number) {
-        this.http.fetch(`${id}`, {
+        this.http.fetch(`user/${id}`, {
             method: 'DELETE'
         }).then(response => {
             this.getAll();

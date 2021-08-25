@@ -9,9 +9,9 @@ namespace Hahn.ApplicatonProcess.July2021.Web.SwaggerExamples
         {
             return new AddUserAssetCommand
             {
-                AssetId = "bitcoin",
-                AssetName = "Bitcoin",
-                AssetSymbol = "BTC",
+                Id = "bitcoin",
+                Name = "Bitcoin",
+                Symbol = "BTC",
                 UserId = 1
             };
         }

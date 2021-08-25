@@ -23,13 +23,13 @@ namespace Hahn.ApplicatonProcess.July2021.Domain.Features.Asset.Command.AddAsset
             if (user == null)
                 throw new NotFoundException(nameof(Entities.User), request.UserId);
 
-            var asset = await _coinCapService.GetAsset(request.AssetId);
+            var asset = await _coinCapService.GetAsset(request.Id);
             if (asset == null ||
-                !asset.Data.Symbol.Equals(request.AssetSymbol, StringComparison.OrdinalIgnoreCase) ||
-                !asset.Data.Name.Equals(request.AssetName, StringComparison.OrdinalIgnoreCase))
-                throw new NotFoundException("asset", request.AssetId);
+                !asset.Data.Symbol.Equals(request.Symbol, StringComparison.OrdinalIgnoreCase) ||
+                !asset.Data.Name.Equals(request.Name, StringComparison.OrdinalIgnoreCase))
+                throw new NotFoundException("asset", request.Id);
 
-            var assetEntity = await _unitOfWork.Assets.GetByIdAsync(request.AssetId);
+            var assetEntity = await _unitOfWork.Assets.GetByIdAsync(request.Id);
             if (assetEntity == null)
                 assetEntity = _unitOfWork.Assets.Add(new Entities.Asset
                 {

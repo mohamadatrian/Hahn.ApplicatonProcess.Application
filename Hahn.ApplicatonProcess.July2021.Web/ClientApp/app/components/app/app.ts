@@ -1,4 +1,4 @@
-import { Aurelia, PLATFORM } from 'aurelia-framework';
+import { PLATFORM } from 'aurelia-framework';
 import { Router, RouterConfiguration } from 'aurelia-router';
 
 export class App {
@@ -32,6 +32,25 @@ export class App {
             moduleId: PLATFORM.moduleName('../user/edit'),
             nav: false,
             title: 'user edit'
+        }, {
+            route: 'asset/list',
+            name: 'assetlist',
+            settings: { icon: 'th-list' },
+            moduleId: PLATFORM.moduleName('../asset/list'),
+            nav: true,
+            title: 'asset list'
+        }, {
+            route: 'asset/details/:id',
+            name: 'assetdetails',
+            moduleId: PLATFORM.moduleName('../asset/details'),
+            nav: false,
+            title: 'asset details'
+        }, {
+            route: 'asset/addtouser/:id',
+            name: 'assetadd',
+            moduleId: PLATFORM.moduleName('../asset/create'),
+            nav: false,
+            title: 'add asset to user'
         }]);
 
         this.router = router;
