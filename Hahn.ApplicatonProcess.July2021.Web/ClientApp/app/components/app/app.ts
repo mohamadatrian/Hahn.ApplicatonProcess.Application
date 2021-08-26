@@ -5,13 +5,6 @@ import { HttpClient } from 'aurelia-fetch-client';
 import { FetchClientInterceptor } from '../../util/FetchClientInterceptor';
 @inject(HttpClient, DialogService)
 export class App {
-  //constructor(httpClient: HttpClient, dialogService: DialogService) {
-  //  httpClient.configure((config) => {
-  //    config.useStandardConfiguration()
-  //      .withInterceptor(new FetchClientInterceptor(dialogService));
-  //  });
-  //}
-
   router: Router;
 
   public configureRouter(config: RouterConfiguration, router: Router): Promise<void> | PromiseLike<void> | void {

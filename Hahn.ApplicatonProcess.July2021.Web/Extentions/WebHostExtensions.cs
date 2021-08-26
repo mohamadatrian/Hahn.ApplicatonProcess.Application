@@ -13,26 +13,23 @@ namespace Hahn.ApplicatonProcess.July2021.Web.Extentions
             {
                 var services = scope.ServiceProvider;
                 var context = services.GetService<ApplicationDbContext>();
-#if DEBUG
-                //context.Database.EnsureCreated();
                 //seed
                 var address = new Address
                 {
                     HouseNo = "123",
-                    PostalCode = "12345",
-                    Street = "navvab"
+                    PostalCode = "1345767889",
+                    Street = "Orumieh"
                 };
                 context.Users.Add(new User
                 {
-                    Age = 23,
+                    Age = 29,
                     Email = "mohamad.atrian@gmail.com",
                     LastName = "atrian",
-                    FirstName = "mohamad",
+                    FirstName = "mohamadreza",
                     Address = address
                 });
 
                 context.SaveChanges();
-#endif
             }
 
             return host;
