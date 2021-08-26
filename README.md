@@ -1,7 +1,6 @@
-# `my-app`
+# `Hahn.ApplicatonProcess.July2021.Web`
 
 
-## Run dev app
 cd to 'Hahn.ApplicatonProcess.July2021.Web'
 
 Run `npm install`,
