@@ -9,3 +9,6 @@ and then `dotnet run`
 
 then open `http://localhost:5000`
 
+
+for development use `npm run webpack:watch`
+
