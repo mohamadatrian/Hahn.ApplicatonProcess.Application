@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using Hahn.ApplicatonProcess.July2021.Domain.Models;
+using MediatR;
 
 namespace Hahn.ApplicatonProcess.July2021.Domain.Features.Asset.Query.GetAssetById
 {
-    public class GetAssetByIdQuery : IRequest<Entities.Asset>
+    public class GetAssetByIdQuery : IRequest<AssetModel>
     {
         public GetAssetByIdQuery(string id)
         {

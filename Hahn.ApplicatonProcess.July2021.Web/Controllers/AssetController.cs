@@ -1,5 +1,4 @@
-﻿using Hahn.ApplicatonProcess.July2021.Domain.Exceptions;
-using Hahn.ApplicatonProcess.July2021.Domain.Features.Asset.Command.AddAsset;
+﻿using Hahn.ApplicatonProcess.July2021.Domain.Features.Asset.Command.AddAsset;
 using Hahn.ApplicatonProcess.July2021.Domain.Features.Asset.Query.GetAllAssets;
 using Hahn.ApplicatonProcess.July2021.Domain.Features.Asset.Query.GetAssetById;
 using Hahn.ApplicatonProcess.July2021.Domain.Models;
@@ -42,15 +41,8 @@ namespace Hahn.ApplicatonProcess.July2021.Web.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<AssetModel>> Get(string id)
         {
-            try
-            {
-                var asset = await _mediator.Send(new GetAssetByIdQuery(id));
-                return Ok(asset);
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var asset = await _mediator.Send(new GetAssetByIdQuery(id));
+            return Ok(asset);
         }
 
         // POST api/<AssetController>
@@ -60,15 +52,8 @@ namespace Hahn.ApplicatonProcess.July2021.Web.Controllers
         [SwaggerRequestExample(typeof(AddUserAssetCommand), typeof(AddUserAssetCommandExample))]
         public async Task<ActionResult<AssetModel>> Post([FromBody] AddUserAssetCommand command)
         {
-            try
-            {
-                var assetId = await _mediator.Send(command);
-                return CreatedAtAction("Get", new { controller = "User", id = command.UserId }, assetId);
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var assetId = await _mediator.Send(command);
+            return CreatedAtAction("Get", new { controller = "User", id = command.UserId }, assetId);
         }
 
         //// PUT api/<AssetController>/5

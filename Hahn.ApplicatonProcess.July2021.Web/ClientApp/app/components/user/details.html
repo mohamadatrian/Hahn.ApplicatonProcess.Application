@@ -45,6 +45,7 @@
 
         </dl>
         <h2>assets</h2>
+
         <table class="table">
             <tr>
                 <th>Id</th>
@@ -61,17 +62,17 @@
                 <th></th>>
             </tr>
             <tr repeat.for="asset of user.assets">
-                <td>${asset.Id}</td>
-                <td>${asset.Rank}</td>
-                <td>${asset.Symbol}</td>
-                <td>${asset.Name}</td>
-                <td>${asset.Supply}</td>
-                <td>${asset.MaxSupply}</td>
-                <td>${asset.MarketCapUsd}</td>
-                <td>${asset.VolumeUsd24Hr}</td>
-                <td>${asset.PriceUsd}</td>
-                <td>${asset.ChangePercent24Hr}</td>
-                <td>${asset.Vwap24Hr}</td>
+                <td>${asset.id}</td>
+                <td>${asset.rank}</td>
+                <td>${asset.symbol}</td>
+                <td>${asset.name}</td>
+                <td>${asset.supply}</td>
+                <td>${asset.maxSupply}</td>
+                <td>${asset.marketCapUsd}</td>
+                <td>${asset.volumeUsd24Hr}</td>
+                <td>${asset.priceUsd}</td>
+                <td>${asset.changePercent24Hr}</td>
+                <td>${asset.vwap24Hr}</td>
             </tr>
         </table>
 

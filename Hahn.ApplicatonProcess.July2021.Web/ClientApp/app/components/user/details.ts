@@ -3,13 +3,13 @@ import { inject } from 'aurelia-framework';
 
 @inject(HttpClient)
 export class Details {
-    public user: User | undefined;
+    user: User;
     http: HttpClient;
     constructor(http: HttpClient) {
         this.http = http;
     }
 
-    activate(params:any) {
+    activate(params) {
         return this.http.fetch(`user/${params.id}`)
             .then(result => result.json() as Promise<User>)
             .then(data => {

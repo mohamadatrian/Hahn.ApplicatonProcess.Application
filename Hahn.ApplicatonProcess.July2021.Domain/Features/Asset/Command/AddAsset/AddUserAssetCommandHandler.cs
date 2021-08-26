@@ -25,8 +25,8 @@ namespace Hahn.ApplicatonProcess.July2021.Domain.Features.Asset.Command.AddAsset
 
             var asset = await _coinCapService.GetAsset(request.Id);
             if (asset == null ||
-                !asset.Data.Symbol.Equals(request.Symbol, StringComparison.OrdinalIgnoreCase) ||
-                !asset.Data.Name.Equals(request.Name, StringComparison.OrdinalIgnoreCase))
+                !asset.Data.Symbol.Equals(request.Symbol, StringComparison.InvariantCultureIgnoreCase) ||
+                !asset.Data.Name.Equals(request.Name, StringComparison.InvariantCultureIgnoreCase))
                 throw new NotFoundException("asset", request.Id);
 
             var assetEntity = await _unitOfWork.Assets.GetByIdAsync(request.Id);

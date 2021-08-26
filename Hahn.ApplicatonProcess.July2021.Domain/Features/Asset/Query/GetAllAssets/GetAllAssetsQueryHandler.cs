@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Hahn.ApplicatonProcess.July2021.Domain.Interfaces;
+﻿using Hahn.ApplicatonProcess.July2021.Domain.Interfaces;
 using Hahn.ApplicatonProcess.July2021.Domain.Models;
 using MediatR;
 using System;

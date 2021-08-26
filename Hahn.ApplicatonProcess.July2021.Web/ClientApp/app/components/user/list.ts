@@ -1,14 +1,18 @@
+import { DialogService } from 'aurelia-dialog';
 import { HttpClient } from 'aurelia-fetch-client';
 import { inject } from 'aurelia-framework';
+import { PromptDialog } from '../../dialog/promptDialog';
 
-@inject(HttpClient)
+@inject(HttpClient, DialogService)
 export class List {
     public users: User[];
     http: HttpClient;
-    constructor(http: HttpClient) {
+    dialogService: DialogService;
+    constructor(http: HttpClient, dialogService: DialogService) {
         this.http = http;
         this.getAll();
         this.users = [];
+        this.dialogService = dialogService;
     }
     getAll() {
         this.http.fetch('user/')
@@ -19,10 +23,14 @@ export class List {
     }
 
     delete(id: number) {
-        this.http.fetch(`user/${id}`, {
-            method: 'DELETE'
-        }).then(response => {
-            this.getAll();
+        this.dialogService.open({ viewModel: PromptDialog, model: 'Do you want to proceed?', lock: false }).whenClosed(dialogResponse => {
+            if (!dialogResponse.wasCancelled) {
+                this.http.fetch(`user/${id}`, {
+                    method: 'DELETE'
+                }).then(response => {
+                    this.getAll();
+                });
+            }
         });
     }
 }

@@ -3,7 +3,7 @@ import { DialogController } from 'aurelia-dialog';
 
 @inject(DialogController)
 
-export class Prompt {
+export class PromptDialog {
     message: string;
     controller: DialogController;
     answer: null;

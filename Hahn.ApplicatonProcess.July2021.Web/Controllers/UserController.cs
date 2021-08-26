@@ -1,5 +1,4 @@
 ﻿using Hahn.ApplicatonProcess.July2021.Domain.Entities;
-using Hahn.ApplicatonProcess.July2021.Domain.Exceptions;
 using Hahn.ApplicatonProcess.July2021.Domain.Features.User.Command.Create;
 using Hahn.ApplicatonProcess.July2021.Domain.Features.User.Command.Delete;
 using Hahn.ApplicatonProcess.July2021.Domain.Features.User.Command.Update;
@@ -42,19 +41,8 @@ namespace Hahn.ApplicatonProcess.July2021.Web.Controllers
         [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
         public async Task<ActionResult<UserModel>> Get(int id)
         {
-            try
-            {
-                var user = await _mediator.Send(new GetUserByIdQuery(id));
-                return Ok(user);
-            }
-            catch (ValidationException ex)
-            {
-                return BadRequest(ex.Errors);
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var user = await _mediator.Send(new GetUserByIdQuery(id));
+            return Ok(user);
         }
 
         [HttpPost]
@@ -63,15 +51,8 @@ namespace Hahn.ApplicatonProcess.July2021.Web.Controllers
         [SwaggerRequestExample(typeof(CreateUserCommand), typeof(CreateUserCommandExample))]
         public async Task<IActionResult> Post([FromBody] CreateUserCommand user)
         {
-            try
-            {
-                var userId = await _mediator.Send(user);
-                return CreatedAtAction(nameof(Get), new { id = userId }, user);
-            }
-            catch (ValidationException ex)
-            {
-                return BadRequest(ex.Errors);
-            }
+            var userId = await _mediator.Send(user);
+            return CreatedAtAction(nameof(Get), new { id = userId }, user);
         }
 
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -80,19 +61,8 @@ namespace Hahn.ApplicatonProcess.July2021.Web.Controllers
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] UpdateUserCommand user)
         {
-            try
-            {
-                var userId = await _mediator.Send(user);
-                return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
-            }
-            catch (ValidationException ex)
-            {
-                return BadRequest(ex.Errors);
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var userId = await _mediator.Send(user);
+            return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
         }
 
         [HttpDelete("{id}")]
@@ -100,15 +70,8 @@ namespace Hahn.ApplicatonProcess.July2021.Web.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult> Delete(int id)
         {
-            try
-            {
-                var userId = await _mediator.Send(new DeleteUserCommand(id));
-                return NoContent();
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var userId = await _mediator.Send(new DeleteUserCommand(id));
+            return NoContent();
         }
     }
 }

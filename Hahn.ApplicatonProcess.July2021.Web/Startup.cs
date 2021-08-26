@@ -2,11 +2,11 @@ using Hahn.ApplicatonProcess.July2021.Data;
 using Hahn.ApplicatonProcess.July2021.Data.Services;
 using Hahn.ApplicatonProcess.July2021.Domain;
 using Hahn.ApplicatonProcess.July2021.Domain.Interfaces;
+using Hahn.ApplicatonProcess.July2021.Web.Extentions;
 using Hahn.ApplicatonProcess.July2021.Web.Logging;
 using Hahn.ApplicatonProcess.July2021.Web.SwaggerExamples;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-//using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -51,7 +51,9 @@ namespace Hahn.ApplicatonProcess.July2021.Web
                 return handler;
             });
 
-            services.AddMvc(c => c.EnableEndpointRouting = false);
+            services.AddRazorPages().AddNewtonsoftJson();
+            services.AddMvc();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hahn.ApplicatonProcess.July2021.Web", Version = "v1" });
@@ -69,28 +71,23 @@ namespace Hahn.ApplicatonProcess.July2021.Web
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hahn.ApplicatonProcess.July2021.Web v1"));
-                //app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-                //{
-                //    HotModuleReplacement = true
-                //});
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
             }
+            app.UseMiddleware<CustomErrorHandlingMiddleware>();
+
+            app.UseHttpsRedirection();
+            app.UseFileServer();
+
             app.UseRouting();
 
-            app.UseStaticFiles();
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
             });
         }
     }

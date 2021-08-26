@@ -1,25 +1,19 @@
 import { HttpClient } from 'aurelia-fetch-client';
-import { inject } from 'aurelia-framework';
+import { inject, observable } from 'aurelia-framework';
 import { Router } from "aurelia-router";
 import { ValidationRules, ValidationController, ValidationControllerFactory } from "aurelia-validation";
 import { DialogService } from 'aurelia-dialog';
-import { Prompt } from '../../dialog/Prompt';
+import { PromptDialog } from '../../dialog/promptDialog';
 import { BootstrapFormRenderer } from '../app/BootstrapFormRenderer';
 
 @inject(Router, HttpClient, ValidationControllerFactory, DialogService)
 export class Create {
-    asset: CreateAsset = {
-        id: '',
-        symbol: '',
-        name: '',
-        userId: 0
-    };
-
+    @observable asset: CreateAsset;
     http: HttpClient;
     router: Router;
     dialogService: DialogService;
     controller: ValidationController;
-
+    userId: number;
     constructor(router: Router,
         http: HttpClient,
         controllerFactory: ValidationControllerFactory,
@@ -29,16 +23,32 @@ export class Create {
         this.dialogService = dialogService;
         this.controller = controllerFactory.createForCurrentScope();
         this.controller.addRenderer(new BootstrapFormRenderer());
+
+        this.setDefaults();
     }
 
-    activate(params: any) {
-        this.asset.userId = params.id;
+    assetChanged() {
+        if (this.asset) {
+            ValidationRules
+                .ensure('id').required()
+                .ensure('symbol').required()
+                .ensure('name').required()
+                .on(this.asset);
+        }
+    }
 
-        ValidationRules
-            .ensure('id').required()
-            .ensure('symbol').required()
-            .ensure('name').required()
-            .on(this.asset);
+    setDefaults() {
+        this.asset = {
+            id: '',
+            name: '',
+            symbol: '',
+            userId: this.userId
+        };
+    }
+
+    activate(params) {
+        this.userId = params.id;
+        this.asset.userId = params.id;
     }
 
     get canReset() {
@@ -50,11 +60,9 @@ export class Create {
 
     reset() {
         if (this.canReset) {
-            this.dialogService.open({ viewModel: Prompt, model: 'Do you want to reset form?', lock: false }).whenClosed(response => {
-                if (!response.wasCancelled && this.asset) {
-                    this.asset.symbol = '';
-                    this.asset.name = '';
-                    this.asset.id = '';
+            this.dialogService.open({ viewModel: PromptDialog, model: 'Do you want to reset form?', lock: false }).whenClosed(response => {
+                if (!response.wasCancelled) {
+                    this.setDefaults();
                 }
             });
         }
@@ -64,7 +72,7 @@ export class Create {
         this.controller.validate()
             .then(v => {
                 if (v.valid) {
-                    this.dialogService.open({ viewModel: Prompt, model: 'Do you want to proceed?', lock: false }).whenClosed(response => {
+                    this.dialogService.open({ viewModel: PromptDialog, model: 'Do you want to proceed?', lock: false }).whenClosed(response => {
                         if (!response.wasCancelled && this.asset) {
                             this.http.fetch(`asset`, {
                                 method: 'POST',

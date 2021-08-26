@@ -1,14 +1,16 @@
 ﻿<template>
     <ux-dialog>
         <ux-dialog-header>
-            <h1>${response.statusText}</h1>
+            <h2>${error.statusCodeText}</h2>
         </ux-dialog-header>
         <ux-dialog-body>
-            <h2>${response.body}</h2>
+            <p repeat.for="message of error.messages">
+                ${message}
+            </p>  
         </ux-dialog-body>
 
         <ux-dialog-footer>
-            <button click.trigger="controller.ok(response)">Ok</button>
+            <button click.trigger="controller.ok(error)">Ok</button>
         </ux-dialog-footer>
     </ux-dialog>
 </template>

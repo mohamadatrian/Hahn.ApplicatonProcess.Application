@@ -3,17 +3,17 @@ import { inject } from 'aurelia-framework';
 
 @inject(HttpClient)
 export class Details {
-    public user: User | undefined;
+    public asset: Asset;
     http: HttpClient;
     constructor(http: HttpClient) {
         this.http = http;
     }
 
     activate(params:any) {
-        return this.http.fetch(`'asset/'${params.id}`)
-            .then(result => result.json() as Promise<User>)
+        return this.http.fetch(`asset/${params.id}`)
+            .then(result => result.json() as Promise<Asset>)
             .then(data => {
-                this.user = data;
+                this.asset = data;
             });
     }
 }

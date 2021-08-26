@@ -45,7 +45,7 @@ namespace Hahn.ApplicatonProcess.July2021.Domain.Features.User.Query.GetUserById
             }
             await Task.WhenAll(taskList);
 
-            userModel.Assets = taskList.Select(x => x.Result.Data);
+            userModel.Assets = taskList.Select(x => x.Result.Data).ToArray();
             return userModel;
         }
     }

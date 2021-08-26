@@ -7,13 +7,14 @@ import { BootstrapFormRenderer } from '../app/BootstrapFormRenderer';
 import { PromptDialog } from '../../dialog/promptDialog';
 
 @inject(Router, HttpClient, ValidationControllerFactory, DialogService)
-export class Edit {
+export class Create {
     @observable user: User;
     http: HttpClient;
     router: Router;
     dialogService: DialogService;
     controller: ValidationController;
-    userId: number;
+
+
     constructor(router: Router,
         http: HttpClient,
         controllerFactory: ValidationControllerFactory,
@@ -23,15 +24,8 @@ export class Edit {
         this.dialogService = dialogService;
         this.controller = controllerFactory.createForCurrentScope();
         this.controller.addRenderer(new BootstrapFormRenderer());
-    }
 
-    activate(params) {
-        this.userId = params.id;
-        this.http.fetch(`user/${params.id}`)
-            .then(result => result.json() as Promise<User>)
-            .then(data => {
-                this.user = data;
-            });
+        this.setDefaults();
     }
 
     userChanged() {
@@ -52,7 +46,7 @@ export class Edit {
 
     setDefaults() {
         this.user = {
-            id: this.userId,
+            id: 0,
             firstName: '',
             lastName: '',
             email: '',
@@ -94,7 +88,7 @@ export class Edit {
                     this.dialogService.open({ viewModel: PromptDialog, model: 'Do you want to proceed?', lock: false }).whenClosed(dialogResponse => {
                         if (!dialogResponse.wasCancelled) {
                             this.http.fetch(`user/`, {
-                                method: 'PUT',
+                                method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
                                 },

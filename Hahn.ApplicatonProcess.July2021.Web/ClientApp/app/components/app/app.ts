@@ -1,7 +1,17 @@
-import { PLATFORM } from 'aurelia-framework';
+import { DialogService } from 'aurelia-dialog';
+import { PLATFORM, inject } from 'aurelia-framework';
 import { Router, RouterConfiguration } from 'aurelia-router';
-
+import { HttpClient } from 'aurelia-fetch-client';
+import { FetchClientInterceptor } from '../../util/FetchClientInterceptor';
+@inject(HttpClient, DialogService)
 export class App {
+    constructor(httpClient: HttpClient, dialogService: DialogService) {
+        httpClient.configure((config) => {
+            config.useStandardConfiguration()
+                .withInterceptor(new FetchClientInterceptor(dialogService));
+        });
+    }
+
     router: Router;
 
     configureRouter(config: RouterConfiguration, router: Router) {
@@ -32,6 +42,12 @@ export class App {
             moduleId: PLATFORM.moduleName('../user/edit'),
             nav: false,
             title: 'user edit'
+        }, {
+            route: 'user/add',
+            name: 'useradd',
+            moduleId: PLATFORM.moduleName('../user/create'),
+            nav: false,
+            title: 'add user'
         }, {
             route: 'asset/list',
             name: 'assetlist',

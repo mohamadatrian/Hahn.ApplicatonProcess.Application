@@ -9,9 +9,9 @@
             <th></th>>
         </tr>
         <tr repeat.for="asset of assets">
-            <td>${asset.Id}</td>
-            <td>${asset.Symbol}</td>
-            <td>${asset.Name}</td>
+            <td>${asset.id}</td>
+            <td>${asset.symbol}</td>
+            <td>${asset.name}</td>
             <td>
                 <a route-href="route:assetdetails; params.bind:{id:asset.id}"
                    class="btn btn-default">
